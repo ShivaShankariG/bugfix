@@ -1,0 +1,363 @@
+
+body{
+    background: rgba(0,0,0, 1);
+}
+P{
+    color: #fff;
+}
+#heading{
+    display: inline-block;
+    margin-left: 40%;
+    color: #f00
+    
+}
+h2{
+    float: right;
+    margin-right: 15px;
+    margin-top: 2%;
+    color:red;
+}
+#main-header{
+    
+     border : 2px solid #000;
+     /*border-style: none;*/
+}
+    
+#section-1 article{
+    display: inline-block;  
+    padding: 10px;
+    margin: 10px;
+}
+body section img{
+    max-width:  100%;
+    height:30%;
+ }
+ 
+ #section-1{
+    margin: auto;
+    margin-top: 20px;
+}
+ 
+
+#display{
+    /*margin-left: 80px;
+    margin-right: 80px;
+    /*overflow: hidden;*/   /*removes all the overflowed content--outside the limit*/
+    margin: 0 auto;
+    display: block;
+    /*background:#a00;*/
+    color: #fff;
+    /*overflow-x: hidden;  /*to remove  horizontal scroll bar when not needed*/
+    position: absolute;
+    /*left: 100px;*/
+    width:70%;
+    margin-left: 200px;
+}
+
+
+
+
+#display img:hover{
+    width: 300px;
+    height: 300px;
+}
+#display img {
+    border: 1px solid #000;
+    padding: 10px;
+    margin-left: 350px;
+}
+#submit{
+    size:500px;
+   margin-left: 200px;
+   background:black;
+	padding:5px 10px;
+	color:red;
+	border:none;
+	border-radius:5px;
+	
+	animation-name: flash;
+	animation-duration: 1s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+
+	/*Firefox 1+*/
+	-webkit-animation-name: flash;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
+
+	/*Safari 3-4*/
+	-moz-animation-name: flash;
+	-moz-animation-duration: 1s;
+	-moz-animation-timing-function: linear;
+	-moz-animation-iteration-count: infinite;
+}
+@keyframes flash {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+}
+
+/*//Firefox 1+
+@-webkit-keyframes flash {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+}
+
+//Safari 3-4
+@-moz-keyframes flash {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+}*/
+#ans{
+    margin-left: 400px;
+}
+
+
+#transparent-bg{
+	position: fixed; 
+	top: 0%; 
+	left: 0%; 
+	width: 100%; 
+	height: 100%; 
+	background:#000;
+	-moz-opacity: 0.80; 
+	opacity: 0.80;
+	filter: alpha(opacity=30);
+	z-index: 1000; 
+	/*-webkit-animation: animateBackground 1s;
+    animation: animateBackground 1s ;*/
+    display: none;
+    
+}
+
+/*@keyframes animateBackground {
+	from {opacity: 0.8;}
+	to {opacity: 0.30;}
+}*/
+
+
+.heart-shape {
+    position: relative;
+    left: 10px;
+    top:50px;
+    width: 50px;
+	-webkit-animation: heart-beats 1s infinite;
+	animation: heart-beats 1s infinite;
+}
+
+.heart-shape:before,
+.heart-shape:after {
+    margin-left: 10px;
+    margin-top: 20px;
+   background: #fd3803;
+   position: absolute;
+   width: 22px;
+   height: 35px;
+   top: 0;
+   left: 22px;
+   content: '';
+   border-radius: 50px 50px 0 0;
+   transform: rotate(-45deg) translateZ(0);
+   -webkit-transform: rotate(-45deg) translateZ(0);
+   transform-origin: 0 100%;
+   -webkit-transform-origin: 0 100%;
+}
+
+.heart-shape:after {
+   left: 0;
+   transform: rotate(45deg) translateZ(0);
+   -webkit-transform: rotate(45deg) translateZ(0);
+   transform-origin :100% 100%;
+   -webkit-transform-origin: 100% 100%;
+}
+
+
+@keyframes heart-beats {
+  0%   { transform: scale(1); background-color:black;}
+  7%  { transform: scale(1.2); }
+  12%  { transform: scale(1.1); }
+  20%  { transform: scale(1.3); }
+  60%  { transform: scale(1); }
+  100% { transform: scale(0.99); }
+}
+
+@-webkit-keyframes heart-beats {
+  0%  { -webkit-transform: scale(1); }
+  7%  { -webkit-transform: scale(1.2); }
+  12% { -webkit-transform: scale(1.1); }
+  20% { -webkit-transform: scale(1.3); }
+  60% { -webkit-transform: scale(1); }
+  100% { -webkit-transform: scale(0.99); }
+}
+
+
+#timer{
+    float: left;
+    font-size: 50px;
+    color: red;
+}
+
+.slider img{
+    max-width: 95%;
+    width: 450px;
+    height: 200px;
+}
+.slider1 img{
+    max-width: 95%;
+    width: 450px;
+    height: 200px;
+}
+.slider2 img{
+    max-width: 95%;
+    width: 450px;
+    height: 200px;
+}
+
+.heart-shape,#timer{
+    position: fixed;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    height: 200;
+
+
+}
+
+.flex-container>img {
+
+    width: 25%;
+    height: 90%;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+}
+
+.flex-container>img:hover {
+    -ms-transform: scale(1.3);
+    /* IE 9 */
+    -webkit-transform: scale(1.3);
+    /* Safari 3-8 */
+    transform: scale(1.3);
+}
+
+  
+
+
+@keyframes animationDropCenter {
+    0% {
+        top: 10%;
+    }
+}
+
+
+
+.flex-container {
+    display: flex;
+    flex-direction: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    height: 200;
+
+
+}
+
+.flex-container>img {
+
+    width: 25%;
+    height: 90%;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+}
+
+.flex-container>img:hover {
+    -ms-transform: scale(1.3);
+    /* IE 9 */
+    -webkit-transform: scale(1.3);
+    /* Safari 3-8 */
+    transform: scale(1.3);
+}
+
+#section-1 img {
+
+    border: solid 1px #bac0c3;
+    border-radius: 20%;
+
+}
+
+#section-1 button {
+
+    border: solid 1px #bac0c3;
+    border-radius: 20%;
+
+}
+
+#section-1 button[data-bubble]:after {
+    content: attr(data-bubble);
+    position: absolute;
+    top: -200;
+    left: 30%;
+    height: 1.5em;
+    line-height: 1.5em;
+    padding: 0 .46em;
+    text-align: center;
+    text-shadow: 0 0.063em 0 rgba(0, 0, 0, .2);
+    background-color: #FFFF00;
+    color: #364652;
+    box-shadow: 0 0.063em 0.063em rgba(0, 0, 0, .2);
+    border-radius: 4em;
+    z-index: -1;
+    -webkit-transform: translateZ(0);
+    /*Prevents text flicker*/
+    will-change: transform;
+}
+
+#section-1 button:hover[data-bubble]:after {
+    -webkit-animation: ease bubbleover .4s;
+    animation: ease bubbleover .4s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    top: -2.25em;
+    /* If pseudo animation not supported [see https://css-tricks.com/transitions-and-animations-on-css-generated-content/], simple hover fallback happens*/
+    z-index: 1;
+}
+
+@-webkit-keyframes bubbleover {
+    0% {
+        -webkit-transform: translate(0, 1em);
+        z-index: -1
+    }
+    50% {
+        -webkit-transform: translate(0, -.5em);
+        z-index: -1
+    }
+    100% {
+        -webkit-transform: translate(0, 0);
+        z-index: 1;
+    }
+}
+
+@keyframes bubbleover {
+    0% {
+        top: 0;
+        transform: translate(0, 0);
+        z-index: -1;
+    }
+    50% {
+        transform: translate(0, -12px);
+        z-index: -1
+    }
+    100% {
+        transform: translate(0, 6px);
+        z-index: 1;
+    }
+}

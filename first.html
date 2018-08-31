@@ -1,0 +1,1450 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <!--serach engine optimization-description -->
+    <meta name="description" content="An interesting debugging event with bidding">
+    <meta name="keywords" content="dare to bid,bugfix,symposium,debugging">
+    <meta name="author" content="Shiva Shankari.G,Subbulakshmi.V,Sivani.S.S">
+
+    <!--to make if fit to any device -->
+    <meta name="viewport" content="width=device-width , initial-scale=0">
+    <title>JUDGE THE CODE</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="bid.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    <style>
+        #section-1 {
+            display: inline-block;
+
+            box-shadow: 0.12em 0.12em 0 rgba(40, 40, 40, .2);
+
+            font-size: 1em;
+
+        }
+
+        #section-1 button {
+            display: block;
+
+            line-height: 1.5em;
+            position: relative;
+            font-weight: bold;
+            text-decoration: none;
+            color: #364652;
+            background-color: #86B2BB;
+            text-shadow: 0 0.063em 0 #a6c6cd;
+        }
+
+        #section-1 button[data-bubble]:after {
+            content: attr(data-bubble);
+            position: absolute;
+            top: 10;
+            width: 20;
+            left: 20;
+            height: 1.5em;
+            line-height: 1.5em;
+
+            text-align: center;
+            text-shadow: 0 0.063em 0 rgba(0, 0, 0, .2);
+            background-color: #eee;
+            color: #364652;
+            box-shadow: 0 0.063em 0.063em rgba(0, 0, 0, .2);
+            border-radius: 6em;
+            z-index: -1;
+            -webkit-transform: translateZ(0);
+            /*Prevents text flicker*/
+            will-change: transform;
+            background-color: gold;
+        }
+
+        #section-1 button :hover[data-bubble]:after {
+            -webkit-animation: ease bubbleover .4s;
+            animation: ease bubbleover .4s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+            top: -1.25em;
+            /* If pseudo animation not supported [see https://css-tricks.com/transitions-and-animations-on-css-generated-content/], simple hover fallback happens*/
+            z-index: 1;
+            background-color: gold;
+        }
+
+        @-webkit-keyframes bubbleover {
+            0% {
+                -webkit-transform: translate(0, 1em);
+                z-index: -1
+            }
+            50% {
+                -webkit-transform: translate(0, -.5em);
+                z-index: -1
+            }
+            100% {
+                -webkit-transform: translate(0, 0);
+                z-index: 1;
+            }
+        }
+
+        @keyframes bubbleover {
+            0% {
+                top: 0;
+                transform: translate(0, 0);
+                z-index: -1;
+            }
+            50% {
+                transform: translate(0, -12px);
+                z-index: -1
+            }
+            100% {
+                transform: translate(0, 6px);
+                z-index: 1;
+            }
+        }
+
+
+        body {
+            background: rgba(0, 0, 0, 1);
+        }
+
+        P {
+            color: #fff;
+        }
+
+        #heading {
+            display: inline-block;
+            margin-left: 40%;
+            color: #f00
+        }
+
+        h2 {
+            float: right;
+            margin-right: 15px;
+            margin-top: 2%;
+            color: red;
+        }
+
+        #main-header {
+
+            border: 2px solid #000;
+            /*border-style: none;*/
+        }
+
+        #section-1 article {
+            display: inline-block;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        body section img {
+            max-width: 100%;
+            height: 30%;
+        }
+
+        #section-1 {
+            margin: auto;
+            margin-top: 20px;
+        }
+
+
+        #display {
+            /*margin-left: 80px;
+    margin-right: 80px;
+    /*overflow: hidden;*/
+            /*removes all the overflowed content--outside the limit*/
+            margin: 0 auto;
+            display: block;
+            /*background:#a00;*/
+            color: #fff;
+            /*overflow-x: hidden;  /*to remove  horizontal scroll bar when not needed*/
+            position: absolute;
+            /*left: 100px;*/
+            width: 70%;
+            margin-left: 200px;
+        }
+
+
+
+
+        #display img:hover {
+            width: 300px;
+            height: 300px;
+        }
+
+        #display img {
+            border: 1px solid #000;
+            padding: 10px;
+            margin-left: 350px;
+        }
+
+        #submit {
+            size: 500px;
+            margin-left: 200px;
+            background: black;
+            padding: 5px 10px;
+            color: red;
+            border: none;
+            border-radius: 5px;
+
+            animation-name: flash;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+
+            /*Firefox 1+*/
+            -webkit-animation-name: flash;
+            -webkit-animation-duration: 1s;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-iteration-count: infinite;
+
+            /*Safari 3-4*/
+            -moz-animation-name: flash;
+            -moz-animation-duration: 1s;
+            -moz-animation-timing-function: linear;
+            -moz-animation-iteration-count: infinite;
+        }
+
+        @keyframes flash {
+            0% {
+                opacity: 1.0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1.0;
+            }
+        }
+
+        /*//Firefox 1+
+@-webkit-keyframes flash {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+}
+
+//Safari 3-4
+@-moz-keyframes flash {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+}*/
+
+        #ans {
+            margin-left: 400px;
+        }
+
+
+        #transparent-bg {
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            -moz-opacity: 0.80;
+            opacity: 0.80;
+            filter: alpha(opacity=30);
+            z-index: 1000;
+            /*-webkit-animation: animateBackground 1s;
+    animation: animateBackground 1s ;*/
+            display: block;
+        }
+
+
+        /*@keyframes animateBackground {
+	from {opacity: 0.8;}
+	to {opacity: 0.30;}*/
+
+        .heart-shape {
+            position: relative;
+            left: 10px;
+            top: 50px;
+            width: 50px;
+            -webkit-animation: heart-beats 1s infinite;
+            animation: heart-beats 1s infinite;
+        }
+
+        .heart-shape:before,
+        .heart-shape:after {
+            margin-left: 10px;
+            margin-top: 20px;
+            background: #fd3803;
+            position: absolute;
+            width: 22px;
+            height: 35px;
+            top: 0;
+            left: 22px;
+            content: '';
+            border-radius: 50px 50px 0 0;
+            transform: rotate(-45deg) translateZ(0);
+            -webkit-transform: rotate(-45deg) translateZ(0);
+            transform-origin: 0 100%;
+            -webkit-transform-origin: 0 100%;
+        }
+
+        .heart-shape:after {
+            left: 0;
+            transform: rotate(45deg) translateZ(0);
+            -webkit-transform: rotate(45deg) translateZ(0);
+            transform-origin: 100% 100%;
+            -webkit-transform-origin: 100% 100%;
+        }
+
+
+        @keyframes heart-beats {
+            0% {
+                transform: scale(1);
+                background-color: black;
+            }
+            7% {
+                transform: scale(1.2);
+            }
+            12% {
+                transform: scale(1.1);
+            }
+            20% {
+                transform: scale(1.3);
+            }
+            60% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(0.99);
+            }
+        }
+
+        @-webkit-keyframes heart-beats {
+            0% {
+                -webkit-transform: scale(1);
+            }
+            7% {
+                -webkit-transform: scale(1.2);
+            }
+            12% {
+                -webkit-transform: scale(1.1);
+            }
+            20% {
+                -webkit-transform: scale(1.3);
+            }
+            60% {
+                -webkit-transform: scale(1);
+            }
+            100% {
+                -webkit-transform: scale(0.99);
+            }
+        }
+
+
+        #timer {
+            float: left;
+            font-size: 50px;
+            color: red;
+        }
+
+
+        .heart-shape,
+        #timer {
+            position: fixed;
+        }
+
+        .flex-container {
+            left: 0%;
+            display: flex;
+            flex-direction: row nowrap;
+            justify-content: space-around;
+            align-items: center;
+            height: 200;
+
+
+        }
+
+        .flex-container>div {
+
+            width: 25%;
+            height: 90%;
+            margin: 10px;
+            text-align: center;
+            line-height: 75px;
+            font-size: 30px;
+        }
+
+        .flex-container>div>img {
+
+            width: 100%;
+            height: 100%;
+            margin: 10px;
+            text-align: center;
+            line-height: 75px;
+            font-size: 30px;
+        }
+
+        .flex-container>img:hover {
+            -ms-transform: scale(1.3);
+            /* IE 9 */
+            -webkit-transform: scale(1.3);
+            /* Safari 3-8 */
+            transform: scale(1.3);
+        }
+
+
+        /*  .dialog {
+            width: 500px;
+            height: 800px;
+            text-align: center;
+            border: solid 1px #bac0c3;
+            border-radius: 5px;
+            box-shadow: 5px 10px 25px 5px #575754;
+            z-index: 1001;
+            display: none;
+            background: #fff;
+            animation: animationDropCenter 1s;
+            top: 30%;
+            left: 30%;
+            margin-top: -9em;
+            /*set to a negative number 1/2 of your height*/
+
+        /*set to a negative number 1/2 of your width
+            border: 1px solid #ccc;
+            position: fixed;
+        }*/
+
+        @keyframes animationDropCenter {
+            0% {
+                top: 10%;
+            }
+        }
+
+
+
+        .flex-container {
+            display: flex;
+            flex-direction: row nowrap;
+            justify-content: space-around;
+            align-items: center;
+            height: 200;
+
+
+        }
+
+        .flex-container>img {
+
+            width: 25%;
+            height: 90%;
+            margin: 10px;
+            text-align: center;
+            line-height: 75px;
+            font-size: 30px;
+        }
+
+        .flex-container>img:hover {
+            -ms-transform: scale(1.3);
+            /* IE 9 */
+            -webkit-transform: scale(1.3);
+            /* Safari 3-8 */
+            transform: scale(1.3);
+        }
+
+        /*  #section-1 img {
+
+            border: solid 1px #bac0c3;
+            border-radius: 20%;
+            width: 50%;
+
+        }
+
+        #section-1 button {
+
+            border: solid 1px #bac0c3;
+            border-radius: 20%;
+            width: 50%
+        }
+*/
+
+        #section-1 button[data-bubble]:after {
+            content: attr(data-bubble);
+            position: absolute;
+            top: 30;
+            height: 1.5em;
+            line-height: 1.5em;
+            padding: 0 .46em;
+            text-align: center;
+            text-shadow: 0 0.063em 0 rgba(0, 0, 0, .2);
+            background-color: #FFFF00;
+            color: #364652;
+            box-shadow: 0 0.063em 0.063em rgba(0, 0, 0, .2);
+            border-radius: 4em;
+            z-index: -1;
+            -webkit-transform: translateZ(0);
+            /*Prevents text flicker*/
+            will-change: transform;
+        }
+
+        #section-1 button:hover[data-bubble]:after {
+            -webkit-animation: ease bubbleover .4s;
+            animation: ease bubbleover .4s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+            top: -2.25em;
+            /* If pseudo animation not supported [see https://css-tricks.com/transitions-and-animations-on-css-generated-content/], simple hover fallback happens*/
+            z-index: 1;
+        }
+
+        @-webkit-keyframes bubbleover {
+            0% {
+                -webkit-transform: translate(0, 1em);
+                z-index: -1
+            }
+            50% {
+                -webkit-transform: translate(0, -.5em);
+                z-index: -1
+            }
+            100% {
+                -webkit-transform: translate(0, 0);
+                z-index: 1;
+            }
+        }
+
+        @keyframes bubbleover {
+            0% {
+                top: 0;
+                transform: translate(0, 0);
+                z-index: -1;
+            }
+            50% {
+                transform: translate(0, -12px);
+                z-index: -1
+            }
+            100% {
+                transform: translate(0, 6px);
+                z-index: 1;
+            }
+        }
+
+        .dialog {
+            width: 500px;
+            height: 500px;
+            text-align: center;
+            border: solid 1px #bac0c3;
+            border-radius: 5px;
+            box-shadow: 5px 10px 25px 5px #575754;
+            z-index: 1001;
+            display: none;
+            background: #fff;
+            animation: animationDropCenter 1s;
+            top: 30%;
+            left: 30%;
+            margin-top: -9em;
+            /*set to a negative number 1/2 of your height*/
+            /*set to a negative number 1/2 of your width*/
+            border: 1px solid #ccc;
+            position: fixed;
+        }
+
+        #dialog_ins {
+            width: 600px;
+            height: 550px;
+            border: solid 1px #bac0c3;
+            border-radius: 5px;
+            box-shadow: 5px 10px 25px 5px #575754;
+            z-index: 1001;
+            visibility: hidden;
+            background: #fff;
+            animation: animationDropCenter 1s;
+            top: 30%;
+            left: 30%;
+            margin-top: -9em;
+            font-family: fantasy;
+            /*set to a negative number 1/2 of your height*/
+            /*set to a negative number 1/2 of your width*/
+            border: 1px solid #ccc;
+            position: fixed;
+        }
+
+        #dialog_pwd {
+            width: 200px;
+            height: 80px;
+            border: solid 1px #bac0c3;
+            border-radius: 5px;
+            box-shadow: 5px 10px 25px 5px #575754;
+            z-index: 1001;
+            visibility: visible;
+            background: #fff;
+            animation: animationDropCenter 1s;
+            top: 50%;
+            left: 50%;
+            margin-top: -9em;
+            /*set to a negative number 1/2 of your height*/
+            /*set to a negative number 1/2 of your width*/
+            border: 1px solid #ccc;
+            position: fixed;
+        }
+
+        #dialog_final {
+            width: 350px;
+            height: 150px;
+            border: solid 1px #bac0c3;
+            border-radius: 5px;
+            box-shadow: 5px 10px 25px 5px #575754;
+            z-index: 1001;
+            visibility: hidden;
+            background: #fff;
+            animation: animationDropCenter 1s;
+            top: 50%;
+            left: 40%;
+            margin-top: -9em;
+            /*set to a negative number 1/2 of your height*/
+            /*set to a negative number 1/2 of your width*/
+            border: 1px solid #ccc;
+            position: fixed;
+        }
+
+        table,
+        th,
+        td {
+            border: 2px solid gray;
+        }
+
+        .slide {
+            position: relative;
+
+        }
+
+        .slide>div {
+            width: 100%;
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            color: white;
+
+            background-color: gray;
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body id="total">
+    <!--instructions dialog box-->
+    <section id="dialog_pwd">
+        ENTER PASSWORD:
+        <input type="password" id="pwd" style="width:80%" />
+        <button value="ok" onclick="close_pwd()">OK</button>
+    </section>
+
+    <section id="dialog_ins">
+        <h1>TIME TO BEGIN YOUR JOURNEY...</h1>
+        <ul>
+            <li>
+                Your journey starts with 100 coins
+            </li>
+            <li>
+                You can bid your coins and choose questions of different difficulty level
+            </li>
+            <table style="width: 100%;">
+                <tr>
+                    <th>DIFFICULTY</th>
+                    <th>COINS BIDED</th>
+                    <th>COINS GAINED</th>
+                </tr>
+                <tr>
+                    <td>easy</td>
+                    <td>30</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>medium</td>
+                    <td>20</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>hard</td>
+                    <td>10</td>
+                    <td>50</td>
+                </tr>
+            </table>
+            <li>
+                Each section consists of 10 questions.
+            </li>
+            <li>
+                The number of remaining questions will be displayed if you hover over a category.
+            </li>
+            <li>
+                Based on your coins the categories become enabled or disabled accordingly
+            </li>
+            <li>
+                If you think the program has an error say in line number 5, enter only the line number (eg: 5 ) else, enter the output
+            </li>
+            <li>You can play until you have time and coins to bid</li>
+            <li>The participants with the highest coins remaining at the end will be selected</li>
+            <br>
+            <hr>
+            <li>WARNING: WE KEEP TRACK OF THE NUMBER OF QUESTIONS ANSWERED</li>
+            <hr>
+        </ul>
+        <button value="close" onclick="close_dia()" style="position:absolute;left: 40%;">CLOSE</button>
+    </section>
+    <!--To make bg gray-->
+    <div id="transparent-bg"></div>
+    <!--Heart-->
+    <div class="heart-shape"></div>
+    <!--Timer-->
+    <div id="timer"></div>
+    <!--Header-->
+    <header id="main-header">
+        <h1 id="heading">
+            <img src="images/logooo.png" />
+        </h1>
+        <h2>COINS:
+            <input type="number" value=100 id="coins" readonly/>
+        </h2>
+        <h2>
+
+            <button id="help" onclick="get_help()">HELP</button>
+
+
+        </h2>
+    </header>
+    <!--QUes dialog-->
+    <section class="dialog" id="dialog">
+
+        <!--  <div id="q1"></div>-->
+        <img id="q1" style="height:90%;width:100%" />
+
+        <input type="textArea" placeholder="Line no or o/p.." id="text" style=" position : absolute;height: 35;width:350;left:40;right:40 ;bottom:10"
+        />
+
+        <button id="submit" onclick="checkAns()" style=" position : absolute;bottom:15;right:10">SUBMIT</button>
+
+
+    </section>
+
+    <!--easy medium hard-->
+    <section id="section-1" style="position: relative;display: flex;flex-flow: row nowrap">
+        <center>
+            <article>
+                <p style="color: white;">EASY</p>
+                <button id="easy" onclick="next(0)" data-bubble=10 style="width:300">
+                    <img src="images/easy_img.jpg" id="easy_img">
+                </button>
+            </article>
+
+            <article>
+                <p style="color: white;">MEDIUM</p>
+                <button id="medium" onclick="next(1)" data-bubble=10 style="width:300">
+                    <img src="images/medium_img.jpg" id="medium_img">
+                </button>
+            </article>
+            <article>
+                <p style="color: white;">
+                    HARD
+                </p>
+                <button id="hard" onclick="next(2)" data-bubble=10 style="width:300">
+                    <img src="images/hard_img.jpg" id="hard_img">
+                </button>
+            </article>
+        </center>
+    </section>
+    <section id="slide"></section>
+
+    <div class="flex-container" id="0flex" style="visibility: hidden; position: absolute; top: 400;">
+
+        <button id="0prev" width="100" height="100" class="prevButton">
+            <img src="images/left_arrow.png" width="20" height="20" />
+        </button>
+        <div class="slide" onmouseover="get_genre('00t')" onmouseout="dgenre('00t')">
+            <img id="00id" class="s" />
+            <div id="00t">Text1</div>
+        </div>
+        <div class="slide" onmouseover="get_genre('01t')" onmouseout="dgenre('01t')">
+            <img id="01id" class="s" />
+            <div id="01t">Text2</div>
+        </div>
+        <div class="slide" onmouseover="get_genre('02t')" onmouseout="dgenre('02t')">
+            <img id="02id" class="s" />
+            <div id="02t">Text3</div>
+        </div>
+        <button id="0next" class="nextButton">
+            <img src="images/right_arrow.png" width="20" height="20" />
+        </button>
+
+    </div>
+
+    <div class="flex-container" id="1flex" style="visibility: hidden;position: absolute; top: 400;">
+
+        <button id="1prev" width="100" height="100" class="prevButton">
+            <img src="images/left_arrow.png" width="20" height="20" />
+        </button>
+        <div class="slide" onmouseover="get_genre('10t')" onmouseout="dgenre('10t')">
+            <img id="10id" class="s" />
+            <div id="10t">Text1</div>
+        </div>
+        <div class="slide" onmouseover="get_genre('11t')" onmouseout="dgenre('11t')">
+            <img id="11id" class="s" />
+            <div id="11t">Text2</div>
+        </div>
+        <div class="slide" onmouseover="get_genre('12t')" onmouseout="dgenre('12t')">
+            <img id="12id" class="s" />
+            <div id="12t">Text3</div>
+        </div>
+        <button id="1next" width="200" height="200" class="nextButton">
+            <img src="images/right_arrow.png" width="20" height="20" />
+        </button>
+
+    </div>
+
+    <div class="flex-container" id="2flex" style="visibility: hidden; position: absolute; top: 400;">
+
+        <button id="2prev" class="prevButton" width="100" height="100">
+            <img src="images/left_arrow.png" width="20" height="20" />
+        </button>
+        <div class="slide" onmouseover="get_genre('20t')" onmouseout="dgenre('20t')">
+            <img id="20id" class="s" />
+            <div id="20t">Text1</div>
+        </div>
+        <div class="slide" onmouseover="get_genre('21t')" onmouseout="dgenre('21t')">
+            <img id="21id" class="s" />
+            <div id="21t">Text2</div>
+        </div>
+        <div class="slide" onmouseover="get_genre('22t')" onmouseout="dgenre('22t')">
+            <img id="22id" class="s" />
+            <div id="22t">Text3</div>
+        </div>
+        <button id="2next" class="nextButton" width="100" height="100">
+            <img src="images/right_arrow.png" width="20" height="20" />
+        </button>
+
+    </div>
+
+    <section id="dialog_final"> GAME OVER !
+        <div id="p"></div>
+        <div id="e"> </div>
+        <div id="m"></div>
+        <div id="h"></div>
+
+    </section>
+    <!--  <script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>-->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <!-- <script type="text/javascript" src="bid1.js">
+    </script>-->
+    <script type="text/javascript">
+        function close_pwd() {
+            if (document.getElementById("pwd").value == "sympo") {
+                document.getElementById("dialog_pwd").style.visibility = "hidden";
+                document.getElementById("dialog_ins").style.visibility = "visible";
+
+            }
+        }
+        function close_dia() {
+            //alert("clicked");
+
+            if (typeof (close_dia.c) == 'undefined') close_dia.c = 0;
+            else close_dia.c++;
+            if (close_dia.c == 0) startTimer();
+            document.getElementById("dialog_ins").style.visibility = "hidden";
+            document.getElementById("transparent-bg").style.display = "none";
+
+        }
+        function get_help() {
+
+            document.getElementById("dialog_ins").style.visibility = "visible";
+            document.getElementById("transparent-bg").style.display = "block";
+        }
+
+        function get_genre(id) {
+            //   alert("new mouseover");
+            document.getElementById(id).style.display = "block";
+        }
+        function dgenre(id) {
+            //   alert("poiruchu")
+            document.getElementById(id).style.display = "none";
+        }
+        $(window).load(
+            function () {
+                preload(['images/0.jpg', 'images/1.jpg',
+                    'images/2.jpg',
+                    'images/3.jpg',
+                    'images/4.jpg',
+                    'images/5.jpg',
+                    'images/6.jpg',
+                    'images/7.jpg',
+                    'images/8.jpg',
+                    'images/9.jpg',
+                    'images/e1',
+                    'images/e2',
+                    'images/e3',
+                    'images/e4',
+                    'images/e5',
+                    'images/e6',
+                    'images/e7',
+                    'images/e8',
+                    'images/e9',
+                    'images/e0',
+                    'images/g10',
+                    'images/g2',
+                    'images/g4',
+                    'images/g6',
+                    'images/g3',
+                    'images/g9',
+                    'images/g12',
+                    'images/g1',
+                    'images/g0',
+                    'images/g00',
+                    'images/m0',
+                    'images/m1',
+                    'images/m2',
+                    'images/m3',
+                    'images/m4',
+                    'images/m5',
+                    'images/m6',
+                    'images/m7',
+                    'images/m8',
+                    'images/m9',
+
+
+
+
+                ])
+            });
+
+        function preload(arrayOfImages) {
+            $(arrayOfImages).each(function () {
+                $('<img />').attr('src', this).appendTo('body').css('display', 'none');
+            });
+        }
+
+        //to remove back button
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+
+        function disableF5(e) { if ((e.which || e.keyCode) == 116 || e.keyCode == 82) e.preventDefault(); };
+        // To disable f5
+        /* jQuery < 1.7 */
+        $(document).bind("keydown", disableF5);
+        /* OR jQuery >= 1.7 */
+        $(document).on("keydown", disableF5);
+        // To re-enable f5
+        /* jQuery < 1.7 */
+        $(document).unbind("keydown", disableF5);
+        /* OR jQuery >= 1.7 */
+        $(document).off("keydown", disableF5);
+        //  document.addEventListener('contextmenu', event => event.preventDefault());
+
+
+
+
+        var ind1 = [0, 0, 0], ind2 = [1, 1, 1], ind3 = [2, 2, 2];
+        var index = [0, 0, 0];
+        var images = [[]], genre = [[]], Ques = [[]], Ans = [[]];
+        genre = [
+            ["Macros", "Ascii", "Operators", "Loop", "Macros", "String", "Operators", "Function", "Pointers", "String"
+            ],
+            ["Macros", "Pointer", "Operators", "Operators", "Function", "Function", "Pointer", "Macro", "Pointer", "Operators"
+            ],
+            ["Pointer", "Operators", "Operators", "Exceptions", "Postfix", "Pointer", "Pointer", "Recursion", "Operators", "Linked List"
+            ]
+        ]
+        Ans = [
+            ["10 500",
+                "97 98",
+                "0",
+                "21",
+                "5",
+                "30",
+                "Thrones",
+                "IN MAIN",
+                "4-36",
+                "scylla6",
+            ],
+            ["10", "2 15 6 8 10", "19 29 551", "0 0 1 3 1", "1110000", "2.00", "12", "FORD IS A GOOD GUY", "1213", "8"
+            ],
+            ["4", "Hello World!", "1", "Caught Base Exception", "10", "3 12", "15", "199", "6", "6 4 2 2 4 6"
+            ]
+        ]
+        images = [
+            ["images/e1.jpg",
+                "images/e4.jpg",
+                "images/e5.jpg",
+                "images/e6.jpg",
+                "images/e7.jpg",
+                "images/e8.jpg",
+                "images/e9.jpg",
+                "images/e0.jpg",
+                "images/e2.jpg",
+                "images/e3.jpg",
+            ],
+            ["images/m0.jpg",
+                "images/m1.jpg",
+                "images/m2.jpg",
+                "images/m3.jpg",
+                "images/m4.jpg",
+                "images/m5.jpg",
+                "images/m6.jpg",
+                "images/m7.jpg",
+                "images/m8.jpg",
+                "images/m9.jpg",
+            ],
+            ["images/g10.jpg",
+                "images/g2.jpg",
+                "images/g4.jpg",
+                "images/g6.jpg",
+                "images/g3.jpg",
+                "images/g9.jpg",
+                "images/g12.jpg",
+                "images/g1.jpg",
+                "images/g0.jpg",
+                "images/g00.jpg",
+            ]
+        ]
+        Ques = [
+            ["images/eQ/0.png",
+
+                "images/eQ/1.png",
+                "images/eQ/2.png",
+                "images/eQ/3.png",
+                "images/eQ/4.png",
+                "images/eQ/5.png",
+                "images/eQ/6.png",
+                "images/eQ/7.png",
+                "images/eQ/8.png",
+                "images/eQ/9.png"],
+
+            ["images/mQ/0.png",
+                "images/mQ/1.png",
+                "images/mQ/2.png",
+                "images/mQ/3.png",
+                "images/mQ/4.png",
+                "images/mQ/5.png",
+                "images/mQ/6.png",
+                "images/mQ/7.png",
+                "images/mQ/8.png",
+                "images/mQ/9.png"],
+
+            ["images/hQ/0.png",
+                "images/hQ/1.png",
+                "images/hQ/2.png",
+                "images/hQ/3.png",
+                "images/hQ/4.png",
+                "images/hQ/5.png",
+                "images/hQ/6.png",
+                "images/hQ/7.png",
+                "images/hQ/8.png",
+                "images/hQ/9.png"]
+
+
+
+        ];
+        function next(id) {
+            if (id == 0) {
+                //   alert("clicked is easy")
+                document.getElementById("0flex").style.visibility = "visible";
+                document.getElementById("1flex").style.visibility = "hidden";
+                document.getElementById("2flex").style.visibility = "hidden";
+                //   alert("length" + images[id].length)
+                document.getElementById('easy').setAttribute("data-bubble", images[id].length)
+            }
+            else if (id == '1') {
+                //    alert("clicked is medium")
+                document.getElementById("0flex").style.visibility = "hidden";
+                document.getElementById("1flex").style.visibility = "visible";
+                document.getElementById("2flex").style.visibility = "hidden";
+                document.getElementById('medium').setAttribute("data-bubble", images[id].length)
+
+            }
+            else {
+                //   alert("clicked is hard")
+                document.getElementById("0flex").style.visibility = "hidden";
+                document.getElementById("1flex").style.visibility = "hidden";
+                document.getElementById("2flex").style.visibility = "visible";
+                document.getElementById('hard').setAttribute("data-bubble", images[id].length)
+
+            }
+            var flag = 1;
+            index[id] = boundary(id, index[id]);
+            ind1[id] = index[id];
+            var x = id + "0id";
+            var y = id + "0t";
+            document.getElementById(y).innerHTML = genre[id][index[id]];
+            document.getElementById(x).src = images[id][index[id]++]
+
+            index[id] = boundary(id, index[id]);
+            ind2[id] = index[id];
+            var x = id + "1id";
+            y = id + "1t";
+            document.getElementById(y).innerHTML = genre[id][index[id]];
+            document.getElementById(x).src = images[id][index[id]++]
+
+            if (index[id] == images[id].length - 1) flag = 0
+            index[id] = boundary(id, index[id]);
+            ind3[id] = index[id];
+            var x = id + "2id";
+            y = id + "2t";
+            document.getElementById(y).innerHTML = genre[id][index[id]];
+            document.getElementById(x).src = images[id][index[id]++]
+
+            index[id] = boundary(id, index[id]);
+            if (typeof id === "number" && flag === 1) {
+                prev(id);
+            }
+            document.getElementById(id + "flex").style.visibility = "visible";
+            console.log("ind1[0] " + ind1[0] + " ind2[0] " + ind2[0] + " ind3[0] " + ind3[0])
+        }
+
+
+        function prev(id) {
+            for (var k = 0; k < 6; k++) {
+                if (index[id] === -1) index[id] = images[id].length - 1;
+                index[id] = index[id] - 1;
+            }
+
+            index[id] = boundary(id, index[id]);
+            ind1[id] = index[id];
+            var x = id + "0id";
+            var y = id + "0t";
+            document.getElementById(y).innerHTML = genre[id][index[id]];
+            document.getElementById(x).src = images[id][index[id]++]
+
+            index[id] = boundary(id, index[id]);
+            ind2[id] = index[id];
+            var x = id + "1id";
+            y = id + "1t";
+            document.getElementById(y).innerHTML = genre[id][index[id]];
+            document.getElementById(x).src = images[id][index[id]++]
+
+
+            index[id] = boundary(id, index[id]);
+            ind3[id] = index[id];
+            var x = id + "2id";
+            y = id + "2t";
+            document.getElementById(y).innerHTML = genre[id][index[id]];
+            document.getElementById(x).src = images[id][index[id]++]
+
+            index[id] = boundary(id, index[id]);
+        }
+        function boundary(id, i) {
+            if (i < 0)
+                i = images[id].length - 1;
+            if (i > images[id].length - 1)
+                i = 0;
+            return i;
+        }
+        function remove_function(row, col) {
+            var easy = document.getElementById('easy');
+            var medium = document.getElementById('medium');
+            var hard = document.getElementById('hard');
+            var easy_img = document.getElementById('easy_img');
+            var medium_img = document.getElementById('medium_img');
+            var hard_img = document.getElementById('hard_img');
+            console.log("before :" + images[row]);
+            var remove_col;
+            if (col === '0') {
+                remove_col = ind1[row];
+                getQues(row, remove_col);
+
+            }
+            else if (col === '1') {
+                remove_col = ind2[row];
+                getQues(row, remove_col);
+            }
+            else {
+
+                remove_col = ind3[row];
+                getQues(row, remove_col);
+            }
+            console.log("image to be removed " + row + remove_col)
+            images[row].splice(remove_col, 1);
+            console.log("after :" + images[row]);
+            if (images[row].length == 2) {
+                document.getElementById(row + "prev").remove();
+                document.getElementById(row + "next").remove();
+                document.getElementById(row + "2id").remove();
+                document.getElementById(row + "2t").remove();
+            }
+
+            if (images[row].length == 1) {
+                document.getElementById(row + "1id").remove();
+                document.getElementById(row + "1t").remove();
+            }
+            if (images[row].length == 0) {
+                document.getElementById(row + "0id").remove();
+                document.getElementById(row + "0t").remove();
+                if (row == 0) {
+
+                    easy.disabled = true
+                    easy_img.style.opacity = "0.1";
+                    easy_img.style.opacity = "alpha(opacity = 50);"
+                }
+                else if (row == 1) {
+
+                    medium.disabled = true
+                    medium_img.style.opacity = "0.1";
+                    medium_img.style.opacity = "alpha(opacity = 50);"
+                }
+                else {
+
+
+                    hard.disabled = true
+                    hard_img.style.opacity = "1";
+                    hard_img.style.opacity = "alpha(opacity = 100);"
+
+                }
+            }
+
+            next(parseInt(row));
+
+
+        }
+        document.getElementById('timer').innerHTML =
+            30 + ":" + 01;
+        window.onload = function () {
+            document.getElementById("text").value = "";
+        }
+
+
+        $('.prevButton').click(function () {
+            var id = $(this).attr('id');
+            prev(id.charAt(0));
+
+        });
+
+        $('.nextButton').click(function () {
+            var id = $(this).attr('id');
+            next(id.charAt(0));
+        })
+
+        $('.s').click(function () {
+            var id = $(this).attr('id');
+            console.log(id)
+            remove_function(id.charAt(0), id.charAt(1));
+
+        });
+        function getQues(row, col) {
+            //      var change = document.getElementById("change_coins");
+            //     change.style.visibility = "visible";
+            getQues.row = row;
+            getQues.col = col;
+            getQues.ans = "";
+            var coins = $("#coins").val()
+            var src;
+            genre[row].splice(col, 1);
+            getQues.ans = Ans[row][col];
+            //    alert("getting the ques: " + row + " " + col)
+            src = Ques[row][col];
+            //     alert("src is " + src);
+            if (row === '0') {
+                //  alert("row 0 col is " + col);
+                //   change.value = "-30";
+                coins = coins - 30;
+                document.getElementById("coins").style.backgroundColor = "red";
+                setTimeout(checge_color, 2000);
+
+            }
+            else if (row === '1') {
+                //     alert("row 1 col is " + col);
+                //    change.value = "-20";
+                coins = coins - 20;
+                document.getElementById("coins").style.backgroundColor = "red";
+                setTimeout(checge_color, 2000);
+            }
+            else {
+                //alert(row + col)
+                //  alert("is it coming here?row 2 col is " + col);
+                //     change.value = "-10";
+                coins = coins - 10;
+                document.getElementById("coins").style.backgroundColor = "red";
+                setTimeout(checge_color, 2000);
+            }
+            // alert("came out")
+            document.getElementById("coins").value = coins;
+            $('#transparent-bg').show();
+            //     document.getElementById("q1").innerHTML = ""
+            //     document.getElementById("q1").appendChild(img);
+
+            document.getElementById("q1").src = src;
+            //      alert("src of image is " + document.getElementById("q1").src)
+            //  alert("ans is " + getQues.ans)
+            Ans[row].splice(col, 1);
+            Ques[row].splice(col, 1);
+
+            document.getElementById("text").value = "";
+            $('#dialog').show();
+        }
+
+
+        var loginID;
+        var hard1 = 0, id1, medium1 = 0, easy1 = 0;
+        var my_url = new URL(window.location.href);
+        id1 = my_url.searchParams.get("login")
+
+        function checkAns() {
+            var coins = parseInt($("#coins").val())
+            var ans = document.getElementById('text').value
+            var row = getQues.row;
+            var col = getQues.col;
+            var correct = getQues.ans;
+            //   var change = document.getElementById("change_coins");
+            // if(row==='0') 
+            if (ans == correct) {
+                //    change.style.visibility = "visible";
+                //  alert("right ans");
+                if (row === '0') {
+                    coins = coins + 10;
+                    easy1 = easy1 + 1;
+                    document.getElementById("coins").style.backgroundColor = "yellow";
+
+                    //  change.value = "+10";
+                }
+                else if (row === '1') {
+                    coins = coins + 30;
+                    medium1 = medium1 + 1;
+                    document.getElementById("coins").style.backgroundColor = "yellow";
+                    //   change.value = "+30";
+                }
+                else {
+                    coins = coins + 50;
+                    hard1 = hard1 + 1;
+                    document.getElementById("coins").style.backgroundColor = "yellow";
+                    //   change.value = "+50";
+                }
+            }
+            else {
+                //  alert("wrong ans")
+                document.getElementById("coins").style.backgroundColor = "red";
+                //  setTimeout(checge_color, 2000);
+
+            }
+
+            document.getElementById("coins").value = coins;
+            checkAns.pts = coins;
+            $('#dialog').hide()
+            $('#transparent-bg').hide()
+            check()
+            setTimeout(checge_color, 2000);
+        }
+        function checge_color() {
+            document.getElementById("coins").style.backgroundColor = "white";
+            //   document.getElementById("change_coins").style.visibility = "hidden";
+        }
+        function check() {
+            var easy = document.getElementById('easy');
+            var medium = document.getElementById('medium');
+            var hard = document.getElementById('hard');
+            var easy_img = document.getElementById('easy_img');
+            var medium_img = document.getElementById('medium_img');
+            var hard_img = document.getElementById('hard_img');
+
+            if (document.getElementById("coins").value >= 30) {
+                //    alert(">=50")
+                easy.disabled = false
+                easy_img.style.opacity = "1";
+                easy_img.style.opacity = "alpha(opacity = 100);"
+                medium.disabled = false
+                medium_img.style.opacity = "1";
+                medium_img.style.opacity = "alpha(opacity = 100);"
+                hard.disabled = false
+                hard_img.style.opacity = "1";
+                hard_img.style.opacity = "alpha(opacity = 100);"
+            }
+
+
+
+            if (document.getElementById("coins").value >= 20 && document.getElementById("coins").value < 30) {
+                //    alert("20 - 50")
+                easy.disabled = true
+                easy_img.style.opacity = "0.1";
+                easy_img.style.opacity = "alpha(opacity = 50);"
+
+
+                medium.disabled = false
+                medium_img.style.opacity = "1";
+                medium_img.style.opacity = "alpha(opacity = 100);"
+
+                hard.disabled = false
+                hard_img.style.opacity = "1";
+                hard_img.style.opacity = "alpha(opacity = 100);"
+
+                document.getElementById("0flex").style.visibility = "hidden";
+
+            }
+
+            if (document.getElementById("coins").value >= 10 && document.getElementById("coins").value < 20) {
+                //    alert("10 - 20");
+                easy.disabled = true
+                easy_img.style.opacity = "0.1";
+                easy_img.style.opacity = "alpha(opacity = 50);"
+                medium.disabled = true
+                medium_img.style.opacity = "0.1";
+                medium_img.style.opacity = "alpha(opacity = 50);"
+                hard.disabled = false
+                hard_img.style.opacity = "1";
+                hard_img.style.opacity = "alpha(opacity = 100);"
+
+                document.getElementById("0flex").style.visibility = "hidden";
+                document.getElementById("1flex").style.visibility = "hidden";
+            }
+            if (document.getElementById("coins").value < 10) {
+                //   alert("You have 0 coins, Game over")
+                output()
+                $('#end-dialog').show()
+                $('#transparent-bg').show()
+            }
+
+
+        }
+        function output() {
+            //   alert("calling ajax " + id1 + " " + checkAns.pts + " " + hard1 + " " + easy1 + " " + medium1);
+            var data = { "id": "'+id1+'", "pts": "'+checkAns.pts+'", "hard": "'+hard1+", "easy": "'+easy1+'", "medium": "'+meduim1+'" };
+            var d = document.getElementById("dialog_final");
+            d.style.visibility = "visible";
+            document.getElementById("p").innerHTML = "Your points : " + checkAns.pts;
+            document.getElementById("e").innerHTML = "Number of easy questions attended: " + easy1;
+            document.getElementById("m").innerHTML = "Number of medium questions attended: " + medium1;
+            document.getElementById("h").innerHTML = "Number of hard questions attended: " + hard1;
+
+            $.ajax({
+                url: "/db.php",
+                type: "POST", //request type,
+                data: { id2: id1, pts2: checkAns.pts, hard2: hard1, easy2: easy1, medium2: medium1 }
+            });
+
+        }
+
+        //startTimer();
+
+        function startTimer() {
+            var presentTime = document.getElementById('timer').innerHTML;
+            //alert(presentTime);
+            var timeArray = presentTime.split(/[:]+/);
+            var m = timeArray[0];
+            var s = checkSecond((timeArray[1] - 1));
+            if (s == 59) {
+                m = m - 1
+            }
+            if (m == 0 && s == 00) {
+
+                output()
+                $('#end-dialog').show()
+                $('#transparent-bg').show()
+            }
+            //if(m<0){alert('timer completed')}
+
+            document.getElementById('timer').innerHTML =
+                m + ":" + s;
+            if (!(m == 0 && s == 00))
+                setTimeout(startTimer, 1000);
+        }
+        function checkSecond(sec) {
+            if (sec < 10 && sec >= 0) { sec = "0" + sec }; // add zero in front of numbers < 10
+            if (sec < 0) { sec = "59" };
+            return sec;
+        }
+    </script>
+</body>
+<!-- end dialog
+<section class="dialog" id="end-dialog">
+    <img src="images/giphy.webp" />
+    <h2>U ARE DONE</h2>
+</section>-->
+
+</html>
