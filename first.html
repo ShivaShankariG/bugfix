@@ -1084,9 +1084,10 @@
             document.getElementById(x).src = images[id][index[id]++]
 
             index[id] = boundary(id, index[id]);
-            if (typeof id === "number" && flag === 1) {
-                prev(id);
-            }
+            /*   if (typeof id === "number" && flag === 1) {
+                   prev(id);
+               }
+               */
             document.getElementById(id + "flex").style.visibility = "visible";
             console.log("ind1[0] " + ind1[0] + " ind2[0] " + ind2[0] + " ind3[0] " + ind3[0])
         }
